@@ -266,4 +266,36 @@ non_passing_high_grade <- pass_status |>
 non_passing_high_grade
 ```
 
+## Question 20
+
+```{r}
+# Calculate pass rate per group
+pass_rate <- pass_status |>
+  group_by(group) |>
+  summarise(pass_rate = mean(pass, na.rm = TRUE))
+
+# Plot pass rate by group
+library(ggplot2)
+library(scales) # For percent formatting
+
+# Plot with enhanced readability and aesthetics
+pass_rate |> 
+  ggplot(aes(x = factor(group), y = pass_rate, fill = pass_rate)) +
+  geom_col(width = 0.7, color = "black") + # Adjust bar width and add border color
+  geom_text(aes(label = scales::percent(pass_rate, accuracy = 1)), 
+            vjust = -0.5, size = 4, color = "black") + # Add percentage labels above bars
+  labs(title = "Pass Rate per Group", x = "Group", y = "Pass Rate") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) + # Set y-axis from 0 to 100%
+  scale_fill_gradient(low = "skyblue", high = "darkblue") + # Gradient fill to highlight pass rates
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Center title and make it bold
+    axis.text.x = element_text(size = 10), # Increase x-axis text size
+    axis.text.y = element_text(size = 10), # Increase y-axis text size
+    axis.title.x = element_text(size = 12), # x-axis title size
+    axis.title.y = element_text(size = 12), # y-axis title size
+    legend.position = "none" # Remove legend for a cleaner look
+  )
+```
+
 
