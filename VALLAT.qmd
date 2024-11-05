@@ -211,6 +211,20 @@ final_grades |> slice_head(n = 5) |> knitr::kable()
 ```
 
 
+## Question 17
+
+```{r}
+final_grades |> 
+  ggplot(aes(x = factor(group), y = final_grade)) +
+  geom_boxplot() +
+  labs(title = "Comparison of Final Grades by Group", x = "Group", y = "Final Grade") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16), # Center title and increase font size
+    axis.text = element_text(size = 10), # Larger axis text
+    axis.title = element_text(size = 12) # Larger axis title
+  )
+```
 
 
 
