@@ -169,4 +169,13 @@ avg_grades_per_course |>
 
 ```
 
+## Question 14
+
+```{r}
+correlations <- avg_grades_per_course |>
+  group_by(group) |>
+  summarise(correlation = cor(`Combat Tactics and Self-Defense`, `Scavenging and Resource Management`))
+```
+
+
 
