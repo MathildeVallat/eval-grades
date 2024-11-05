@@ -65,3 +65,16 @@ grades |>
   labs(title = "Number of Students per Group", x = "Group", y = "Student Count")
 ```
 
+## Question 6
+
+```{r}
+grades |>
+  filter(course == "Art and Expression in a Post-Apocalyptic World") |>
+  group_by(group) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE)) |>
+  ggplot(aes(x = group, y = avg_grade)) +
+  geom_col() +
+  labs(title = "Average Grade in Art and Expression by Group", x = "Group", y = "Average Grade")
+```
+
+
