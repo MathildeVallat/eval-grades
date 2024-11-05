@@ -226,5 +226,33 @@ final_grades |>
   )
 ```
 
+## Question 18
+
+```{r}
+# Average grade per course per student
+avg_grades_per_course <- grades |>
+  group_by(id, group, course, semester) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE), .groups = "drop")
+
+# Calculate if each student passes each course (average grade >= 5 for each course)
+course_pass <- avg_grades_per_course |>
+  group_by(id) |>
+  summarise(course_pass = all(avg_grade >= 5))
+
+# Calculate the semester averages and check if each semester's average is >= 10
+semester_pass <- avg_grades_per_course |>
+  group_by(id, semester) |>
+  summarise(semester_avg = mean(avg_grade, na.rm = TRUE), .groups = "drop") |>
+  group_by(id) |>
+  summarise(semester_pass = all(semester_avg >= 10))
+
+# Combine passing conditions and calculate the final pass status
+pass_status <- final_grades |>
+  left_join(course_pass, by = "id") |>
+  left_join(semester_pass, by = "id") |>
+  mutate(pass = course_pass & semester_pass) |>
+  select(id, group, final_grade, pass)
+```
+
 
 
