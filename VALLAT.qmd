@@ -31,10 +31,19 @@ Give the number of grades in the data set directly in the text of your quarto fi
 
 ```{r}
 total_grades <- nrow(grades)
-total_grades
 ```
 
 The data set contains 44195 grades.
 
+## Question 3
+
+Use distinct() compute the number of students on the data set and report the value directly in the text as in the previous question.
+
+```{r}
+num_students <- grades |> distinct(id) |> summarise(count = n()) |> pull(count)
+
+```
+
+The data set contains 761 students.
 
 
