@@ -54,3 +54,14 @@ students <- grades |> distinct(id, group)
 students |> slice_head(n = 5) |> knitr::kable()
 ```
 
+## Question 5
+
+```{r}
+grades |> 
+  distinct(id, group) |> 
+  count(group) |> 
+  ggplot(aes(x = group, y = n)) + 
+  geom_col() + 
+  labs(title = "Number of Students per Group", x = "Group", y = "Student Count")
+```
+
