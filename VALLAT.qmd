@@ -190,4 +190,27 @@ avg_grades_per_course |>
   labs(title = "Grades in Most Correlated Group", x = "Scavenging", y = "Combat Tactics")
 ```
 
+## Question 16
+
+```{r}
+
+# Calculate average grade per course for each student
+avg_grades_per_course <- grades |>
+  group_by(id, group, course) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE), .groups = "drop")
+
+# Calculate the final grade as the average of the course averages
+final_grades <- avg_grades_per_course |>
+  group_by(id, group) |>
+  summarise(final_grade = mean(avg_grade, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(final_grade))
+
+# Display the top 5 rows
+final_grades |> slice_head(n = 5) |> knitr::kable()
+
+```
+
+
+
+
 
