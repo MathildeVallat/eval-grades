@@ -134,5 +134,16 @@ grade_distribution |>
   theme_minimal()
 ```
 
+## Question 11
+
+```{r}
+combat_grades |> 
+  ggplot(aes(x = factor(group), y = num_grades)) +
+  geom_boxplot() +
+  labs(title = "Grades per Student in Combat Tactics by Group", x = "Group", y = "Number of Grades")
+```
+It seems like yes, the number of grades per student in Combat Tactics and Self-Defense does depend on the group.
+
+
 
 
