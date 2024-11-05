@@ -252,6 +252,10 @@ pass_status <- final_grades |>
   left_join(semester_pass, by = "id") |>
   mutate(pass = course_pass & semester_pass) |>
   select(id, group, final_grade, pass)
+
+# Display the top 5 rows
+pass_status |> slice_head(n = 5) |> knitr::kable()
+
 ```
 
 ## Question 19
@@ -273,6 +277,8 @@ non_passing_high_grade
 pass_rate <- pass_status |>
   group_by(group) |>
   summarise(pass_rate = mean(pass, na.rm = TRUE))
+
+pass_rate |> slice_head(n = 5) |> knitr::kable()
 
 # Plot pass rate by group
 library(ggplot2)
