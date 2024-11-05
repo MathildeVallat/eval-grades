@@ -144,6 +144,17 @@ combat_grades |>
 ```
 It seems like yes, the number of grades per student in Combat Tactics and Self-Defense does depend on the group.
 
+## Question 12
+
+```{r}
+avg_grades_per_course <- grades |>
+  group_by(id, group, course) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = course, values_from = avg_grade)
+
+avg_grades_per_course |> select(id, group, starts_with("Art"), starts_with("Combat")) |> 
+  slice_head(n = 5) |> knitr::kable()
+```
 
 
 
