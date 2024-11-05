@@ -156,5 +156,17 @@ avg_grades_per_course |> select(id, group, starts_with("Art"), starts_with("Comb
   slice_head(n = 5) |> knitr::kable()
 ```
 
+## Question 13
+
+```{r}
+avg_grades_per_course |>
+  ggplot(aes(x = `Scavenging and Resource Management`, 
+             y = `Post-Apocalyptic History and Archaeology`)) +
+  geom_point(alpha = 0.5, color = "black", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed")
+  labs(title = "Average Grades: History vs. Scavenging", x = "Scavenging", y = "History")
+
+
+```
 
 
