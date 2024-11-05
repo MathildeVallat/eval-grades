@@ -177,5 +177,17 @@ correlations <- avg_grades_per_course |>
   summarise(correlation = cor(`Combat Tactics and Self-Defense`, `Scavenging and Resource Management`))
 ```
 
+## Question 15
+
+```{r}
+most_corr_group <- correlations |> filter(abs(correlation) == max(abs(correlation))) |> pull(group)
+
+avg_grades_per_course |>
+  filter(group == most_corr_group) |>
+  ggplot(aes(x = `Scavenging and Resource Management`, y = `Combat Tactics and Self-Defense`)) +
+  geom_point(size = 4, alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed")
+  labs(title = "Grades in Most Correlated Group", x = "Scavenging", y = "Combat Tactics")
+```
 
 
