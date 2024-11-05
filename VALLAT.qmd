@@ -1,5 +1,28 @@
 ---
 title: "subject-17"
 author: "Mathilde Vallat"
-format: html
+format:
+  html: default
+  pdf: default
 ---
+```{r}
+#| message: false
+here::i_am("eval-grades.Rproj")
+library(here)
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+theme_set(theme_bw())
+
+```
+
+
+## Question 1
+Load the data set.
+
+```{r}
+grades <- read_delim(here("data", "grades.csv"))
+
+```
+
