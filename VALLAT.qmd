@@ -5,6 +5,7 @@ format:
   html: default
   pdf: default
 ---
+
 ```{r}
 #| message: false
 here::i_am("eval-grades.Rproj")
@@ -17,8 +18,8 @@ theme_set(theme_bw())
 
 ```
 
-
 ## Question 1
+
 Load the data set.
 
 ```{r}
@@ -27,6 +28,7 @@ grades <- read_delim(here("data", "grades.csv"))
 ```
 
 ## Question 2
+
 Give the number of grades in the data set directly in the text of your quarto file, in a sentence of the form “The data set contains xxx grades.” where xxx is replaced by the number of grades. This must be computed from the data set.
 
 ```{r}
@@ -85,4 +87,26 @@ grades |>
   geom_density(alpha = 0.5) +
   labs(title = "Grade Distribution by Semester", x = "Grade", fill = "Semester")
 ```
+
+## Question 8
+
+```{r}
+grades_per_student <- grades |> 
+  group_by(id, group) |> 
+  summarise(num_grades = n(),.groups = "drop")
+
+grades_per_student |> slice_head(n = 5) |> knitr::kable()
+
+min_grades <- min(grades_per_student$num_grades)
+max_grades <- max(grades_per_student$num_grades)
+avg_grades <- mean(grades_per_student$num_grades)
+med_grades <- median(grades_per_student$num_grades)
+```
+
+Summary statistics for the number of grades per student:
+
+| Minimum        | Maximum        | Average                  | Median         |
+|----------------|----------------|--------------------------|----------------|
+| 50 | 60 | 58.075 | 58 |
+
 
