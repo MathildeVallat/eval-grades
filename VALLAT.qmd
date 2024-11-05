@@ -120,3 +120,19 @@ combat_grades <- grades |>
 combat_grades |> slice_head(n = 5) |> knitr::kable()
 ```
 
+## Question 10
+
+```{r}
+grade_distribution <- combat_grades |> 
+  count(num_grades)
+
+grade_distribution |> 
+  ggplot(aes(x = num_grades, y = n)) +
+  geom_col() +
+  labs(title = "Distribution of Grades Count in Combat Tactics and Self-Defense", 
+       x = "Number of Grades", y = "Student Count") +
+  theme_minimal()
+```
+
+
+
