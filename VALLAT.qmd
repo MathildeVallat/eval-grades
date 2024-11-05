@@ -46,4 +46,11 @@ num_students <- grades |> distinct(id) |> summarise(count = n()) |> pull(count)
 
 The data set contains 761 students.
 
+## Question 4
+
+```{r}
+students <- grades |> distinct(id, group)
+
+students |> slice_head(n = 5) |> knitr::kable()
+```
 
