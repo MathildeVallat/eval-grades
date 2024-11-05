@@ -254,5 +254,16 @@ pass_status <- final_grades |>
   select(id, group, final_grade, pass)
 ```
 
+## Question 19
+
+```{r}
+# Count students who do not pass but have a final grade >= 10
+non_passing_high_grade <- pass_status |> 
+  filter(!pass & final_grade >= 10) |> 
+  count()
+
+# Display the count of such students
+non_passing_high_grade
+```
 
 
