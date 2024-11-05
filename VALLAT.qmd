@@ -109,4 +109,14 @@ Summary statistics for the number of grades per student:
 |----------------|----------------|--------------------------|----------------|
 | 50 | 60 | 58.075 | 58 |
 
+## Question 9
+
+```{r}
+combat_grades <- grades |>
+  filter(course == "Combat Tactics and Self-Defense") |>
+  group_by(id, group) |>
+  summarise(num_grades = n(), .groups = "drop")
+
+combat_grades |> slice_head(n = 5) |> knitr::kable()
+```
 
